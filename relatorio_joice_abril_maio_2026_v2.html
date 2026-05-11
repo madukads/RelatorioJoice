@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Relatório Urban Capital — Joice Tegner</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Relatório de Gestão Urban Capital - Performance dos Studios de Joice Tegner em Novo Hamburgo, RS. Período: 20 Abr - 10 Mai 2026.">
+  <title>Relatório Urban Capital — Joice Tegner | Abr-Mai 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -17,10 +18,14 @@
     --card-border: #2E2E2E;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     background: var(--bg);
     color: var(--white);
     font-family: 'Barlow', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   /* PAGE BREAKS */
@@ -33,7 +38,9 @@
   }
   @media print {
     .page { page-break-after: always; min-height: 100vh; }
-    body { background: var(--bg) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { background: var(--bg) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; color-adjust: exact; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; color-adjust: exact !important; }
+    .cover::before, .cover::after { opacity: 0.2; }
   }
 
   /* HEADER */
@@ -375,6 +382,21 @@
 
   /* PERCENT LABEL */
   .pct { font-size: 11px; color: var(--gold); margin-left: 4px; }
+
+  /* RESPONSIVE */
+  @media screen and (max-width: 768px) {
+    .page { padding: 24px 20px; }
+    .cover-title { font-size: 36px; }
+    .cover-meta { flex-direction: column; gap: 24px; }
+    .section-name { font-size: 28px; }
+    .cards-2, .cards-3, .cards-4 { grid-template-columns: 1fr; }
+    .row { flex-direction: column; }
+    .col-2, .col-3 { flex: 1 !important; }
+    .reservas-table { font-size: 11px; }
+    .reservas-table th, .reservas-table td { padding: 8px 6px; }
+    .page-footer { flex-direction: column; gap: 8px; text-align: center; left: 20px; right: 20px; }
+    .bar-value { width: auto; font-size: 11px; }
+  }
 </style>
 </head>
 <body>
