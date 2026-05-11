@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Urban Capital — Joice Tegner</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1C1C1C;
+    --gold: #D3AE36;
+    --gold-dark: #A5892F;
+    --gold-deep: #665727;
+    --white: #FFFFFF;
+    --gray: #5C5C5C;
+    --card-bg: #242424;
+    --card-border: #2E2E2E;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+  }
+
+  /* PAGE BREAKS */
+  .page {
+    width: 100%;
+    min-height: 100vh;
+    padding: 48px 56px;
+    position: relative;
+    page-break-after: always;
+  }
+  @media print {
+    .page { page-break-after: always; min-height: 100vh; }
+    body { background: var(--bg) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+
+  /* HEADER */
+  .page-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--gold-deep);
+  }
+  .brand { display: flex; flex-direction: column; gap: 2px; }
+  .brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .brand-sub {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+  .page-label {
+    text-align: right;
+  }
+  .page-label-main {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+  .page-label-period {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-top: 2px;
+  }
+
+  /* COVER PAGE */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-deep);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    border: 1px solid var(--gold-dark);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+  }
+  .cover-inner { position: relative; z-index: 1; }
+  .cover-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+  .cover-title span { color: var(--gold); }
+  .cover-sub {
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 48px;
+  }
+  .cover-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 48px;
+  }
+  .cover-meta {
+    display: flex;
+    gap: 48px;
+    justify-content: center;
+  }
+  .cover-meta-item { text-align: center; }
+  .cover-meta-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .cover-meta-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--gold);
+  }
+
+  /* SECTION TITLE */
+  .section-title {
+    margin-bottom: 32px;
+  }
+  .section-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .section-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--white);
+    line-height: 1;
+  }
+  .section-name span { color: var(--gold); }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    gap: 16px;
+  }
+  .cards-2 { grid-template-columns: repeat(2, 1fr); }
+  .cards-3 { grid-template-columns: repeat(3, 1fr); }
+  .cards-4 { grid-template-columns: repeat(4, 1fr); }
+
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), transparent);
+  }
+  .card-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--gray);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .card-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1;
+  }
+  .card-value.gold { color: var(--gold); }
+  .card-value.large { font-size: 36px; }
+  .card-sub {
+    font-size: 11px;
+    color: var(--gray);
+    margin-top: 6px;
+  }
+  .card-badge {
+    display: inline-block;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-top: 8px;
+  }
+  .badge-green { background: rgba(74, 222, 128, 0.1); color: #4ADE80; border: 1px solid rgba(74, 222, 128, 0.2); }
+  .badge-gold { background: rgba(211, 174, 54, 0.1); color: var(--gold); border: 1px solid rgba(211, 174, 54, 0.2); }
+  .badge-gray { background: rgba(92, 92, 92, 0.2); color: var(--gray); border: 1px solid var(--card-border); }
+
+  /* HIGHLIGHT CARD */
+  .card-highlight {
+    background: linear-gradient(135deg, #1e1a0e 0%, #242010 100%);
+    border: 1px solid var(--gold-deep);
+  }
+  .card-highlight::before {
+    background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+  }
+
+  /* TABLE */
+  .reservas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+  }
+  .reservas-table th {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--gray);
+    text-transform: uppercase;
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--card-border);
+    font-weight: 400;
+  }
+  .reservas-table td {
+    font-size: 13px;
+    color: var(--white);
+    padding: 12px 12px;
+    border-bottom: 1px solid rgba(46,46,46,0.5);
+  }
+  .reservas-table tr:last-child td { border-bottom: none; }
+  .reservas-table td.plat {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .plat-airbnb { color: #FF5A5F; }
+  .plat-booking { color: #003580; background: #e8f0fa; padding: 2px 6px; border-radius: 3px; font-size: 9px; }
+  .plat-direta { color: var(--gold); }
+  .value-cell { font-family: 'Cormorant Garamond', serif; font-size: 16px; color: var(--gold); }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold-deep), transparent);
+    margin: 28px 0;
+  }
+
+  /* TOTAL ROW */
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--card-bg);
+    border: 1px solid var(--gold-deep);
+    border-radius: 8px;
+    padding: 16px 22px;
+    margin-top: 16px;
+  }
+  .total-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--gray);
+    text-transform: uppercase;
+  }
+  .total-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: var(--gold);
+  }
+
+  /* BAR CHART */
+  .bar-chart { margin-top: 12px; }
+  .bar-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .bar-label { font-size: 11px; color: var(--gray); width: 60px; flex-shrink: 0; }
+  .bar-track {
+    flex: 1;
+    height: 8px;
+    background: var(--card-border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-dark));
+  }
+  .bar-value { font-size: 12px; color: var(--white); width: 80px; text-align: right; flex-shrink: 0; }
+
+  /* STAR RATING */
+  .stars { color: var(--gold); font-size: 18px; letter-spacing: 2px; }
+
+  /* GRID ROW LAYOUT */
+  .row { display: flex; gap: 16px; margin-bottom: 16px; }
+  .row > .card { flex: 1; }
+  .col-2 { flex: 2 !important; }
+  .col-3 { flex: 3 !important; }
+
+  /* FOOTER */
+  .page-footer {
+    position: absolute;
+    bottom: 32px;
+    left: 56px;
+    right: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--gold-deep);
+    padding-top: 12px;
+  }
+  .footer-left { font-size: 10px; color: var(--gray); letter-spacing: 0.1em; }
+  .footer-right { font-size: 10px; color: var(--gold); letter-spacing: 0.1em; }
+
+  /* APTO COLOR INDICATORS */
+  .apto-1-color { border-top-color: #D3AE36 !important; }
+  .apto-2-color { border-top-color: #A5892F !important; }
+  .apto-3-color { border-top-color: #FFFFFF !important; }
+  .apto-4-color { border-top-color: #665727 !important; }
+
+  /* GENERAL DASH BAR */
+  .apto-bar {
+    display: flex;
+    gap: 0;
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .apto-bar-seg { height: 100%; }
+
+  /* PERCENT LABEL */
+  .pct { font-size: 11px; color: var(--gold); margin-left: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ==================== CAPA ==================== -->
+<div class="page cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">Relatório de Gestão</div>
+    <div class="cover-title">Joice<br><span>Tegner</span></div>
+    <div class="cover-sub">4 Studios · Novo Hamburgo · RS</div>
+    <div class="cover-divider"></div>
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Período</div>
+        <div class="cover-meta-value">20 Abr – 10 Mai 2026</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Faturamento</div>
+        <div class="cover-meta-value">R$ 8.086,88</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Locações</div>
+        <div class="cover-meta-value">15</div>
+      </div>
+      <div class="cover-meta-item">
+        <div class="cover-meta-label">Avaliações</div>
+        <div class="cover-meta-value">100% ★ 5</div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div class="footer-left">URBAN CAPITAL · Gestão Profissional de Imóveis</div>
+    <div class="footer-right">CONFIDENCIAL</div>
+  </div>
+</div>
+
+<!-- ==================== APTO 1 ==================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="brand">
+      <div class="brand-name">Urban Capital</div>
+      <div class="brand-sub">Gestão Profissional de Imóveis</div>
+    </div>
+    <div class="page-label">
+      <div class="page-label-main">Relatório de Performance</div>
+      <div class="page-label-period">20 Abr – 10 Mai 2026</div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <div class="section-eyebrow">Desempenho individual</div>
+    <div class="section-name">Apartamento <span>01</span></div>
+  </div>
+
+  <div class="row">
+    <div class="card card-highlight col-2">
+      <div class="card-label">Faturamento total do período</div>
+      <div class="card-value large gold">R$ 1.468,61</div>
+      <div class="card-sub">Airbnb + Booking · 6 noites reservadas</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Plataformas ativas</div>
+      <div class="card-value">2</div>
+      <div class="card-sub">Airbnb · Booking</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Noites reservadas</div>
+      <div class="card-value">6</div>
+      <div class="card-sub">5 Airbnb + 1 Booking</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-label">Airbnb</div>
+      <div class="card-value gold">R$ 1.244,61</div>
+      <div class="card-sub">5 noites · média 1 noite/estadia</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Booking</div>
+      <div class="card-value gold">R$ 224,00</div>
+      <div class="card-sub">1 noite · 03–04/05/2026</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Avaliação média</div>
+      <div class="stars">★★★★★</div>
+      <div class="card-sub">100% avaliações 5 estrelas</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Taxa de serviço Airbnb</div>
+      <div class="card-value" style="color:var(--gray); font-size:20px">-R$ 59,39</div>
+      <div class="card-sub">Descontada pelo Airbnb</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card" style="margin-bottom:12px">
+    <div class="card-label">Detalhamento das reservas</div>
+    <table class="reservas-table">
+      <thead>
+        <tr>
+          <th>Plataforma</th>
+          <th>Período</th>
+          <th>Duração</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="plat plat-airbnb">Airbnb</td>
+          <td>20 Abr – 10 Mai</td>
+          <td>5 noites (múltiplas)</td>
+          <td class="value-cell">R$ 1.244,61</td>
+        </tr>
+        <tr>
+          <td><span class="plat plat-booking">BOOKING</span></td>
+          <td>03 – 04 Mai 2026</td>
+          <td>1 noite</td>
+          <td class="value-cell">R$ 224,00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="total-row">
+    <div class="total-label">Total líquido · Apto 01</div>
+    <div class="total-value">R$ 1.468,61</div>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-left">URBAN CAPITAL · Joice Tegner</div>
+    <div class="footer-right">Abr – Mai 2026 · Apto 01</div>
+  </div>
+</div>
+
+<!-- ==================== APTO 2 ==================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="brand">
+      <div class="brand-name">Urban Capital</div>
+      <div class="brand-sub">Gestão Profissional de Imóveis</div>
+    </div>
+    <div class="page-label">
+      <div class="page-label-main">Relatório de Performance</div>
+      <div class="page-label-period">20 Abr – 10 Mai 2026</div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <div class="section-eyebrow">Desempenho individual</div>
+    <div class="section-name">Apartamento <span>02</span></div>
+  </div>
+
+  <div class="row">
+    <div class="card card-highlight col-2">
+      <div class="card-label">Faturamento total do período</div>
+      <div class="card-value large gold">R$ 1.049,26</div>
+      <div class="card-sub">Airbnb + Reserva Direta · 4 noites reservadas</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Plataformas ativas</div>
+      <div class="card-value">2</div>
+      <div class="card-sub">Airbnb · Direta</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Noites reservadas</div>
+      <div class="card-value">4</div>
+      <div class="card-sub">3 Airbnb + 1 Direta</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-label">Airbnb</div>
+      <div class="card-value gold">R$ 749,26</div>
+      <div class="card-sub">3 noites · média 1 noite/estadia</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Reserva Direta</div>
+      <div class="card-value gold">R$ 300,00</div>
+      <div class="card-sub">Patricia · 09–10/05/2026</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Avaliação média</div>
+      <div class="stars">★★★★★</div>
+      <div class="card-sub">100% avaliações 5 estrelas</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Taxa de serviço Airbnb</div>
+      <div class="card-value" style="color:var(--gray); font-size:20px">-R$ 35,74</div>
+      <div class="card-sub">Descontada pelo Airbnb</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card" style="margin-bottom:12px">
+    <div class="card-label">Detalhamento das reservas</div>
+    <table class="reservas-table">
+      <thead>
+        <tr>
+          <th>Plataforma</th>
+          <th>Hóspede / Período</th>
+          <th>Duração</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="plat plat-airbnb">Airbnb</td>
+          <td>Múltiplas reservas</td>
+          <td>3 noites</td>
+          <td class="value-cell">R$ 749,26</td>
+        </tr>
+        <tr>
+          <td class="plat plat-direta">Direta</td>
+          <td>Patricia · 09–10 Mai</td>
+          <td>1 noite</td>
+          <td class="value-cell">R$ 300,00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="total-row">
+    <div class="total-label">Total líquido · Apto 02</div>
+    <div class="total-value">R$ 1.049,26</div>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-left">URBAN CAPITAL · Joice Tegner</div>
+    <div class="footer-right">Abr – Mai 2026 · Apto 02</div>
+  </div>
+</div>
+
+<!-- ==================== APTO 3 ==================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="brand">
+      <div class="brand-name">Urban Capital</div>
+      <div class="brand-sub">Gestão Profissional de Imóveis</div>
+    </div>
+    <div class="page-label">
+      <div class="page-label-main">Relatório de Performance</div>
+      <div class="page-label-period">20 Abr – 10 Mai 2026</div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <div class="section-eyebrow">Desempenho individual · Destaque do período</div>
+    <div class="section-name">Apartamento <span>03</span></div>
+  </div>
+
+  <div class="row">
+    <div class="card card-highlight col-2">
+      <div class="card-label">Faturamento total do período</div>
+      <div class="card-value large gold">R$ 3.332,19</div>
+      <div class="card-sub">44% do faturamento total · Maior gerador do período</div>
+      <div class="card-badge badge-gold">★ DESTAQUE DO PERÍODO</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Tipo de reserva</div>
+      <div class="card-value">Longa<br>permanência</div>
+      <div class="card-sub">19 noites no período</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Noites reservadas</div>
+      <div class="card-value">19</div>
+      <div class="card-sub">22 Abr – continua em Mai</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-label">Plataforma</div>
+      <div class="card-value" style="font-size:20px">Airbnb</div>
+      <div class="card-sub">Canal único neste período</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Faturamento bruto</div>
+      <div class="card-value gold">R$ 3.450,00</div>
+      <div class="card-sub">Antes da taxa de serviço</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Taxa de serviço Airbnb</div>
+      <div class="card-value" style="color:var(--gray); font-size:20px">-R$ 117,81</div>
+      <div class="card-sub">Descontada pelo Airbnb</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Avaliação média</div>
+      <div class="stars">★★★★★</div>
+      <div class="card-sub">100% avaliações 5 estrelas</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card" style="margin-bottom:12px">
+    <div class="card-label">Nota — reserva de longa permanência</div>
+    <p style="font-size:13px;color:var(--gray);line-height:1.6;margin-top:8px">
+      A reserva do Apto 03 cobre o período de <span style="color:var(--white)">22 de abril a 22 de maio de 2026</span> — 30 noites no total.
+      As 19 noites contabilizadas neste relatório correspondem à fração <span style="color:var(--white)">20 Abr – 10 Mai</span>.
+      As noites restantes (11–22 Mai) serão registradas no <span style="color:var(--gold)">próximo relatório mensal</span>.
+    </p>
+    <div style="margin-top:12px;padding:12px 16px;background:rgba(211,174,54,0.06);border:1px solid var(--gold-deep);border-radius:6px;font-size:12px;color:var(--gray)">
+      ✦ Reservas de longa permanência reduzem custo operacional de limpeza e eliminam o risco de vacância no período — perfil de hóspede mais rentável da carteira.
+    </div>
+  </div>
+
+  <div class="total-row">
+    <div class="total-label">Total líquido · Apto 03 (parcial)</div>
+    <div class="total-value">R$ 3.332,19</div>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-left">URBAN CAPITAL · Joice Tegner</div>
+    <div class="footer-right">Abr – Mai 2026 · Apto 03</div>
+  </div>
+</div>
+
+<!-- ==================== APTO 4 ==================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="brand">
+      <div class="brand-name">Urban Capital</div>
+      <div class="brand-sub">Gestão Profissional de Imóveis</div>
+    </div>
+    <div class="page-label">
+      <div class="page-label-main">Relatório de Performance</div>
+      <div class="page-label-period">20 Abr – 10 Mai 2026</div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <div class="section-eyebrow">Desempenho individual</div>
+    <div class="section-name">Apartamento <span>04</span></div>
+  </div>
+
+  <div class="row">
+    <div class="card card-highlight col-2">
+      <div class="card-label">Faturamento total do período</div>
+      <div class="card-value large gold">R$ 2.236,82</div>
+      <div class="card-sub">Airbnb + Booking + 2 Reservas Diretas · 8 noites reservadas</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Plataformas ativas</div>
+      <div class="card-value">3</div>
+      <div class="card-sub">Airbnb · Booking · Direta</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Noites reservadas</div>
+      <div class="card-value">8</div>
+      <div class="card-sub">2 Airbnb + 2 Booking + 4 Diretas</div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <div class="card-label">Airbnb</div>
+      <div class="card-value gold">R$ 523,82</div>
+      <div class="card-sub">2 noites · 02–03 Mai</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Booking</div>
+      <div class="card-value gold">R$ 570,00</div>
+      <div class="card-sub">2 noites · 10–12 Mai</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Reservas Diretas</div>
+      <div class="card-value gold">R$ 1.143,00</div>
+      <div class="card-sub">Emily + Andrade</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Avaliação média</div>
+      <div class="stars">★★★★★</div>
+      <div class="card-sub">100% avaliações 5 estrelas</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="card" style="margin-bottom:12px">
+    <div class="card-label">Detalhamento das reservas</div>
+    <table class="reservas-table">
+      <thead>
+        <tr>
+          <th>Plataforma</th>
+          <th>Hóspede / Período</th>
+          <th>Duração</th>
+          <th>Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="plat plat-airbnb">Airbnb</td>
+          <td>Múltiplas reservas</td>
+          <td>2 noites</td>
+          <td class="value-cell">R$ 523,82</td>
+        </tr>
+        <tr>
+          <td class="plat plat-booking">Booking</td>
+          <td>Reserva · 10–12 Mai</td>
+          <td>2 noites</td>
+          <td class="value-cell">R$ 570,00</td>
+        </tr>
+        <tr>
+          <td class="plat plat-direta">Direta</td>
+          <td>Emily · 02–03 Mai</td>
+          <td>1 noite</td>
+          <td class="value-cell">R$ 333,00</td>
+        </tr>
+        <tr>
+          <td class="plat plat-direta">Direta</td>
+          <td>Andrade · 03–06 Mai</td>
+          <td>3 noites</td>
+          <td class="value-cell">R$ 810,00</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="total-row">
+    <div class="total-label">Total líquido · Apto 04</div>
+    <div class="total-value">R$ 2.236,82</div>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-left">URBAN CAPITAL · Joice Tegner</div>
+    <div class="footer-right">Abr – Mai 2026 · Apto 04</div>
+  </div>
+</div>
+
+<!-- ==================== DASHBOARD GERAL ==================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="brand">
+      <div class="brand-name">Urban Capital</div>
+      <div class="brand-sub">Gestão Profissional de Imóveis</div>
+    </div>
+    <div class="page-label">
+      <div class="page-label-main">Visão Consolidada</div>
+      <div class="page-label-period">20 Abr – 10 Mai 2026</div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <div class="section-eyebrow">Consolidado · 4 unidades</div>
+    <div class="section-name">Dashboard <span>Geral</span></div>
+  </div>
+
+  <!-- KPIs principais -->
+  <div class="cards-grid cards-2" style="margin-bottom:16px">
+    <div class="card card-highlight">
+      <div class="card-label">Faturamento total bruto</div>
+      <div class="card-value large gold">R$ 8.353,92</div>
+      <div class="card-sub">Período de 21 dias</div>
+    </div>
+    <div class="card card-highlight">
+      <div class="card-label">Faturamento total liquido</div>
+      <div class="card-value large gold">R$ 8.086,88</div>
+      <div class="card-sub">Período de 21 dias</div>
+    </div>
+  </div>
+
+    <!-- KPIs principais -->
+  <div class="cards-grid cards-3" style="margin-bottom:16px">
+    <div class="card">
+      <div class="card-label">Total de locações</div>
+      <div class="card-value">15</div>
+      <div class="card-sub">Airbnb · Booking · Diretas</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Taxa de ocupação</div>
+      <div class="card-value">38,8<span class="pct">%</span></div>
+      <div class="card-sub">Média dos 4 aptos</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Avaliação geral</div>
+      <div class="stars" style="font-size:22px">★★★★★</div>
+      <div class="card-badge badge-green">100% 5 estrelas</div>
+    </div>
+  </div>
+
+  <!-- Faturamento por canal -->
+  <div class="row">
+    <div class="card col-2">
+      <div class="card-label">Faturamento por canal</div>
+      <div class="bar-chart">
+        <div class="bar-item">
+          <div class="bar-label">Airbnb</div>
+          <div class="bar-track"><div class="bar-fill" style="width:72.3%"></div></div>
+          <div class="bar-value">R$ 5.849,88 <span style="color:var(--gray);font-size:10px">72,3%</span></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Diretas</div>
+          <div class="bar-track"><div class="bar-fill" style="width:17.8%;background:linear-gradient(90deg,var(--gold-dark),var(--gold-deep))"></div></div>
+          <div class="bar-value">R$ 1.443,00 <span style="color:var(--gray);font-size:10px">17,8%</span></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Booking</div>
+          <div class="bar-track"><div class="bar-fill" style="width:9.8%;background:linear-gradient(90deg,#003580,#1a4080)"></div></div>
+          <div class="bar-value">R$ 794,00 <span style="color:var(--gray);font-size:10px">9,8%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card col-2">
+      <div class="card-label">Faturamento por apartamento</div>
+      <div class="bar-chart">
+        <div class="bar-item">
+          <div class="bar-label">Apto 03</div>
+          <div class="bar-track"><div class="bar-fill" style="width:41.2%"></div></div>
+          <div class="bar-value">R$ 3.332,19 <span style="color:var(--gray);font-size:10px">41,2%</span></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Apto 04</div>
+          <div class="bar-track"><div class="bar-fill" style="width:27.7%;background:linear-gradient(90deg,var(--gold-dark),var(--gold-deep))"></div></div>
+          <div class="bar-value">R$ 2.236,82 <span style="color:var(--gray);font-size:10px">27,7%</span></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Apto 01</div>
+          <div class="bar-track"><div class="bar-fill" style="width:18.2%;background:linear-gradient(90deg,#888,#666)"></div></div>
+          <div class="bar-value">R$ 1.468,61 <span style="color:var(--gray);font-size:10px">18,2%</span></div>
+        </div>
+        <div class="bar-item">
+          <div class="bar-label">Apto 02</div>
+          <div class="bar-track"><div class="bar-fill" style="width:13%;background:linear-gradient(90deg,#555,#444)"></div></div>
+          <div class="bar-value">R$ 1.049,26 <span style="color:var(--gray);font-size:10px">13,0%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela consolidada -->
+  <div class="card">
+    <div class="card-label">Consolidado por apartamento</div>
+    <table class="reservas-table">
+      <thead>
+        <tr>
+          <th>Apartamento</th>
+          <th>Airbnb</th>
+          <th>Booking</th>
+          <th>Reservas Diretas</th>
+          <th>Noites</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Apto 01</strong></td>
+          <td class="value-cell" style="font-size:13px">R$ 1.244,61</td>
+          <td class="value-cell" style="font-size:13px">R$ 224,00</td>
+          <td style="color:var(--gray)">—</td>
+          <td>6</td>
+          <td class="value-cell">R$ 1.468,61</td>
+        </tr>
+        <tr>
+          <td><strong>Apto 02</strong></td>
+          <td class="value-cell" style="font-size:13px">R$ 749,26</td>
+          <td style="color:var(--gray)">—</td>
+          <td class="value-cell" style="font-size:13px">R$ 300,00</td>
+          <td>4</td>
+          <td class="value-cell">R$ 1.049,26</td>
+        </tr>
+        <tr>
+          <td><strong>Apto 03</strong> <span class="card-badge badge-gold" style="font-size:9px;padding:1px 6px">destaque</span></td>
+          <td class="value-cell" style="font-size:13px">R$ 3.332,19</td>
+          <td style="color:var(--gray)">—</td>
+          <td style="color:var(--gray)">—</td>
+          <td>19</td>
+          <td class="value-cell">R$ 3.332,19</td>
+        </tr>
+        <tr>
+          <td><strong>Apto 04</strong></td>
+          <td class="value-cell" style="font-size:13px">R$ 523,82</td>
+          <td class="value-cell" style="font-size:13px">R$ 570,00</td>
+          <td class="value-cell" style="font-size:13px">R$ 1.143,00</td>
+          <td>8</td>
+          <td class="value-cell">R$ 2.236,82</td>
+        </tr>
+        <tr style="background:rgba(211,174,54,0.05)">
+          <td><strong style="color:var(--gold)">TOTAL</strong></td>
+          <td class="value-cell">R$ 5.849,88</td>
+          <td class="value-cell">R$ 794,00</td>
+          <td class="value-cell">R$ 1.443,00</td>
+          <td><strong>37</strong></td>
+          <td class="value-cell" style="font-size:18px">R$ 8.086,88</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="cards-grid cards-3" style="margin-top:16px">
+    <div class="card">
+      <div class="card-label">Duração média por estadia</div>
+      <div class="card-value">3 <span style="font-size:16px;color:var(--gray)">noites</span></div>
+      <div class="card-sub">Dado Airbnb do período</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Cancelamentos</div>
+      <div class="card-value">1</div>
+      <div class="card-sub">3,1% do total · 1 ocorrência</div>
+    </div>
+    <div class="card">
+      <div class="card-label">Próximo relatório</div>
+      <div class="card-value" style="font-size:20px">10 Jun</div>
+      <div class="card-sub">Período: 11 – 31 de maio</div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-left">URBAN CAPITAL · Joice Tegner · Relatório confidencial</div>
+    <div class="footer-right">Abr – Mai 2026 · Dashboard Geral</div>
+  </div>
+
+  <!-- Comparativo de performance -->
+  <div class="section-title" style="margin-top:28px">
+    <div class="section-eyebrow">Comparativo de performance</div>
+    <div class="section-name">Evolução <span>do período</span></div>
+  </div>
+
+  <div class="cards-grid cards-4" style="margin-bottom:16px">
+    <div class="card">
+      <div class="card-label">Faturamento líquido</div>
+      <div class="card-value gold">+298,6%</div>
+      <div class="card-sub">
+        R$ 2.028,76 → R$ 8.086,88
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Noites reservadas</div>
+      <div class="card-value gold">+311,1%</div>
+      <div class="card-sub">
+        9 → 37 noites
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Tempo médio de estadia</div>
+      <div class="card-value gold">+200%</div>
+      <div class="card-sub">
+        1 → 3 noites por reserva
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Canais de venda</div>
+      <div class="card-value gold">+2</div>
+      <div class="card-sub">
+        Entrada de Booking e Diretas
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-label">Resumo comparativo</div>
+
+    <table class="reservas-table">
+      <thead>
+        <tr>
+          <th>Métrica</th>
+          <th>Período anterior</th>
+          <th>Período atual</th>
+          <th>Evolução</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td><strong>Faturamento líquido</strong></td>
+          <td>R$ 2.028,76</td>
+          <td class="value-cell">R$ 8.086,88</td>
+          <td style="color:var(--gold);font-weight:700">+298,6%</td>
+        </tr>
+
+        <tr>
+          <td><strong>Noites reservadas</strong></td>
+          <td>9</td>
+          <td class="value-cell">37</td>
+          <td style="color:var(--gold);font-weight:700">+311,1%</td>
+        </tr>
+
+        <tr>
+          <td><strong>Média por estadia</strong></td>
+          <td>1 noite</td>
+          <td class="value-cell">3 noites</td>
+          <td style="color:var(--gold);font-weight:700">+200%</td>
+        </tr>
+
+        <tr>
+          <td><strong>Reservas diretas</strong></td>
+          <td>R$ 0,00</td>
+          <td class="value-cell">R$ 1.443,00</td>
+          <td style="color:var(--gold);font-weight:700">Novo canal</td>
+        </tr>
+
+        <tr>
+          <td><strong>Booking</strong></td>
+          <td>R$ 0,00</td>
+          <td class="value-cell">R$ 794,00</td>
+          <td style="color:var(--gold);font-weight:700">Novo canal</td>
+        </tr>
+
+        <tr>
+          <td><strong>Melhor apartamento</strong></td>
+          <td>Apto 03 · R$ 1.054,39</td>
+          <td class="value-cell">Apto 03 · R$ 3.332,19</td>
+          <td style="color:var(--gold);font-weight:700">+216%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ==================== MARCOS DE IMPLANTAÇÃO ==================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="brand">
+      <div class="brand-name">Urban Capital</div>
+      <div class="brand-sub">Gestão Profissional de Imóveis</div>
+    </div>
+    <div class="page-label">
+      <div class="page-label-main">Marcos da Implantação</div>
+      <div class="page-label-period">3 Plataformas Concluídas</div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <div class="section-eyebrow">Newsletter · Maio 2026</div>
+    <div class="section-name">Conquistas <span>do Período</span></div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px; padding:28px">
+    <p style="font-size:14px; color:var(--white); line-height:1.7; margin-bottom:14px;">
+      Joice, este foi um mês especial. Concluímos a implantação completa dos 4 studios nas <strong style="color:var(--gold)">três principais plataformas de hospedagem do mundo</strong>: Airbnb, Booking e VRBO. A partir de agora, os anúncios estão ativos e recebendo reservas simultaneamente em todos os canais — multiplicando a visibilidade e o potencial de faturamento.
+    </p>
+    <p style="font-size:14px; color:var(--white); line-height:1.7;">
+      Esta página marca o fim da fase de estruturação e o início da fase de crescimento ativo.
+    </p>
+  </div>
+
+  <div class="cards-grid cards-3" style="margin-bottom:20px">
+    <div class="card card-highlight">
+      <div class="card-label">Airbnb</div>
+      <div class="card-value large" style="color:#FF5A5F">20 Abr</div>
+      <div class="card-sub">Live · Superhost ativo</div>
+      <div class="card-badge badge-green" style="margin-top:14px">✓ Implantado</div>
+    </div>
+    <div class="card card-highlight">
+      <div class="card-label">Booking</div>
+      <div class="card-value large" style="color:#003580">10 Mai</div>
+      <div class="card-sub">Live · Primeira reserva fechada</div>
+      <div class="card-badge badge-green" style="margin-top:14px">✓ Implantado</div>
+    </div>
+    <div class="card card-highlight">
+      <div class="card-label">VRBO</div>
+      <div class="card-value large" style="color:var(--gold)">10 Mai</div>
+      <div class="card-sub">Live · Distribuído em 5 sites</div>
+      <div class="card-badge badge-green" style="margin-top:14px">✓ Implantado</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px">
+    <div class="card-label">O que muda com as 3 plataformas ativas</div>
+    <table class="reservas-table">
+      <thead>
+        <tr>
+          <th>Aspecto</th>
+          <th>Antes (Apenas Airbnb)</th>
+          <th>Agora (3 Plataformas)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Alcance de hóspedes</strong></td>
+          <td>Apenas usuários Airbnb</td>
+          <td class="value-cell" style="font-size:13px">Airbnb + Booking + VRBO + Expedia + Hotels.com</td>
+        </tr>
+        <tr>
+          <td><strong>Perfil de hóspede</strong></td>
+          <td>Predominante lazer</td>
+          <td class="value-cell" style="font-size:13px">Lazer + Corporativo + Internacional</td>
+        </tr>
+        <tr>
+          <td><strong>Cobertura geográfica</strong></td>
+          <td>Brasil</td>
+          <td class="value-cell" style="font-size:13px">Brasil + Europa + América Latina</td>
+        </tr>
+        <tr>
+          <td><strong>Diversificação de risco</strong></td>
+          <td>Dependente de um canal</td>
+          <td class="value-cell" style="font-size:13px">3 canais independentes</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-highlight card" style="border-color:var(--gold)">
+    <div class="card-label" style="color:var(--gold)">Próxima fase</div>
+    <p style="font-size:13px; color:var(--white); line-height:1.7; margin-top:8px;">
+      Com a implantação concluída, entramos na fase de <strong>otimização e crescimento ativo</strong>. Os próximos meses serão dedicados a melhorar a precificação dinâmica, ampliar a ocupação em cada plataforma e construir histórico de avaliações nos novos canais.
+    </p>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-left">URBAN CAPITAL · Joice Tegner</div>
+    <div class="footer-right">Marcos da Implantação · Mai 2026</div>
+  </div>
+</div>
+
+<!-- ==================== ANÁLISE DOS ANÚNCIOS POR PLATAFORMA ==================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="brand">
+      <div class="brand-name">Urban Capital</div>
+      <div class="brand-sub">Gestão Profissional de Imóveis</div>
+    </div>
+    <div class="page-label">
+      <div class="page-label-main">Análise dos Anúncios</div>
+      <div class="page-label-period">Performance por Plataforma</div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <div class="section-eyebrow">Como cada plataforma está performando</div>
+    <div class="section-name">Diagnóstico <span>por Canal</span></div>
+  </div>
+
+  <!-- AIRBNB -->
+  <div class="card" style="margin-bottom:16px; border-left: 3px solid #FF5A5F">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px">
+      <div>
+        <div class="card-label" style="color:#FF5A5F">AIRBNB · Implantado em 20/Abr</div>
+        <div class="card-value" style="font-size:22px; margin-top:4px">Studio com Piscina | Pet Friendly</div>
+      </div>
+      <div style="text-align:right">
+        <div class="card-badge badge-gold">Superhost</div>
+        <div class="card-sub" style="margin-top:4px">★ 4,95 · 38 avaliações</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:var(--white); line-height:1.7; margin-top:10px;">
+      O Airbnb segue como o principal canal de receita do portfólio, responsável por <strong style="color:var(--gold)">R$ 5.849,88 (72,3%)</strong> do faturamento do período. O selo Superhost foi mantido e a propriedade já é destacada como <em>"um dos poucos lugares na região com piscina"</em> pelo algoritmo — diferencial que aumenta visibilidade em até 40% nas buscas.
+    </p>
+
+    <div class="cards-grid cards-3" style="margin-top:14px">
+      <div style="font-size:11px; color:var(--gray)">
+        <div style="text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px">Pontos fortes</div>
+        <div style="color:var(--white); font-size:13px; line-height:1.5">Superhost · Piscina destacada · Avaliações 5★</div>
+      </div>
+      <div style="font-size:11px; color:var(--gray)">
+        <div style="text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px">Oportunidades</div>
+        <div style="color:var(--white); font-size:13px; line-height:1.5">Instalação de detectores · Smart Pricing ativo</div>
+      </div>
+      <div style="font-size:11px; color:var(--gray)">
+        <div style="text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px">Próximo passo</div>
+        <div style="color:var(--gold); font-size:13px; line-height:1.5">Caminho ao Guest Favorite</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOKING -->
+  <div class="card" style="margin-bottom:16px; border-left: 3px solid #003580">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px">
+      <div>
+        <div class="card-label" style="color:#5a8fcf">BOOKING · Implantado em 10/Mai</div>
+        <div class="card-value" style="font-size:22px; margin-top:4px">Anúncio ativo · 4 studios</div>
+      </div>
+      <div style="text-align:right">
+        <div class="card-badge badge-green">Novo canal</div>
+        <div class="card-sub" style="margin-top:4px">2 reservas no primeiro mês</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:var(--white); line-height:1.7; margin-top:10px;">
+      Apenas dias após a implantação, o Booking já trouxe <strong style="color:var(--gold)">R$ 794,00 em receita</strong> distribuídos em 2 reservas — uma no Apto 01 (03–04 Mai) e outra no Apto 04 (10–12 Mai). O canal capta um perfil diferente: viajantes corporativos, internacionais e quem prefere reservar com cancelamento gratuito.
+    </p>
+
+    <div class="cards-grid cards-3" style="margin-top:14px">
+      <div style="font-size:11px; color:var(--gray)">
+        <div style="text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px">Pontos fortes</div>
+        <div style="color:var(--white); font-size:13px; line-height:1.5">Programa Genius · Cancelamento flexível</div>
+      </div>
+      <div style="font-size:11px; color:var(--gray)">
+        <div style="text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px">Oportunidades</div>
+        <div style="color:var(--white); font-size:13px; line-height:1.5">Construir histórico · Aumentar nota inicial</div>
+      </div>
+      <div style="font-size:11px; color:var(--gray)">
+        <div style="text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px">Próximo passo</div>
+        <div style="color:var(--gold); font-size:13px; line-height:1.5">Atingir nota 9.0+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VRBO -->
+  <div class="card" style="margin-bottom:16px; border-left: 3px solid var(--gold)">
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px">
+      <div>
+        <div class="card-label" style="color:var(--gold)">VRBO · Implantado em 10/Mai</div>
+        <div class="card-value" style="font-size:22px; margin-top:4px">Studio c/ Piscina e Pet Friendly</div>
+      </div>
+      <div style="text-align:right">
+        <div class="card-badge badge-green">Novo canal</div>
+        <div class="card-sub" style="margin-top:4px">Aguardando primeiras reservas</div>
+      </div>
+    </div>
+
+    <p style="font-size:13px; color:var(--white); line-height:1.7; margin-top:10px;">
+      O VRBO é a plataforma com maior potencial de crescimento internacional. Pertencente ao grupo Expedia, os anúncios são automaticamente distribuídos para <strong style="color:var(--gold)">Expedia, Hotels.com, Orbitz e Travelocity</strong> — multiplicando o alcance em 5 sites diferentes. O foco é viajantes internacionais e grupos familiares.
+    </p>
+
+    <div class="cards-grid cards-3" style="margin-top:14px">
+      <div style="font-size:11px; color:var(--gray)">
+        <div style="text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px">Pontos fortes</div>
+        <div style="color:var(--white); font-size:13px; line-height:1.5">Distribuído em 5 sites · Público internacional</div>
+      </div>
+      <div style="font-size:11px; color:var(--gray)">
+        <div style="text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px">Oportunidades</div>
+        <div style="color:var(--white); font-size:13px; line-height:1.5">Aquecer o anúncio · Primeiras avaliações</div>
+      </div>
+      <div style="font-size:11px; color:var(--gray)">
+        <div style="text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px">Próximo passo</div>
+        <div style="color:var(--gold); font-size:13px; line-height:1.5">Posicionamento no Top 10%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-left">URBAN CAPITAL · Joice Tegner</div>
+    <div class="footer-right">Análise por Plataforma · Mai 2026</div>
+  </div>
+</div>
+
+<!-- ==================== PLANOS URBAN CAPITAL POR PLATAFORMA ==================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="brand">
+      <div class="brand-name">Urban Capital</div>
+      <div class="brand-sub">Gestão Profissional de Imóveis</div>
+    </div>
+    <div class="page-label">
+      <div class="page-label-main">Planos Urban Capital</div>
+      <div class="page-label-period">Disponíveis em cada plataforma</div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <div class="section-eyebrow">Modalidades de gestão</div>
+    <div class="section-name">Planos <span>Ativos</span></div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px">
+    <p style="font-size:13px; color:var(--white); line-height:1.7;">
+      Sua gestão atual contempla os <strong style="color:var(--gold)">três planos da Urban Capital ativos simultaneamente</strong>, cada um operando em uma plataforma. Essa estratégia garante presença completa em todos os canais relevantes do mercado, com nível de serviço adequado ao perfil de cada plataforma.
+    </p>
+  </div>
+
+  <div class="cards-grid cards-3" style="margin-bottom:20px">
+    <div class="card" style="border-top:3px solid #FF5A5F">
+      <div class="card-label">PLANO FAVORITO</div>
+      <div class="card-value" style="font-size:22px; margin-top:4px">Airbnb</div>
+      <div class="card-sub" style="margin-top:10px; line-height:1.6">
+        Plano mais completo, voltado a anúncios com alto potencial de Guest Favorite. Inclui otimização contínua de SEO, conteúdo, fotos e precificação avançada por eventos.
+      </div>
+      <div class="card-badge badge-green" style="margin-top:14px">✓ Ativo nos 4 studios</div>
+    </div>
+    <div class="card" style="border-top:3px solid #003580">
+      <div class="card-label">PLANO FERIADO</div>
+      <div class="card-value" style="font-size:22px; margin-top:4px">Booking</div>
+      <div class="card-sub" style="margin-top:10px; line-height:1.6">
+        Plano otimizado para o perfil mais corporativo e internacional do Booking. Inclui participação no programa Genius, política de cancelamento flexível e estratégia para construir nota acima de 9.0.
+      </div>
+      <div class="card-badge badge-green" style="margin-top:14px">✓ Ativo nos 4 studios</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--gold)">
+      <div class="card-label">PLANO DIA A DIA</div>
+      <div class="card-value" style="font-size:22px; margin-top:4px">VRBO</div>
+      <div class="card-sub" style="margin-top:10px; line-height:1.6">
+        Plano estruturado para construção inicial de histórico no VRBO e Expedia. Inclui aquecimento do anúncio, monitoramento de filtros internacionais e estratégia de Instant Book.
+      </div>
+      <div class="card-badge badge-green" style="margin-top:14px">✓ Ativo nos 4 studios</div>
+    </div>
+  </div>
+
+  <div class="card-highlight card" style="border-color:var(--gold)">
+    <div class="card-label" style="color:var(--gold)">Visão integrada</div>
+    <p style="font-size:13px; color:var(--white); line-height:1.7; margin-top:8px;">
+      Os três planos operam de forma <strong>sincronizada</strong> via channel manager — calendário único, sem risco de overbooking. Cada reserva, em qualquer plataforma, atualiza automaticamente as outras duas.
+    </p>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-left">URBAN CAPITAL · Joice Tegner</div>
+    <div class="footer-right">Planos Ativos · Mai 2026</div>
+  </div>
+</div>
+
+<!-- ==================== PLANO DE AÇÃO 6 MESES + PRÓXIMOS PASSOS ==================== -->
+<div class="page">
+  <div class="page-header">
+    <div class="brand">
+      <div class="brand-name">Urban Capital</div>
+      <div class="brand-sub">Gestão Profissional de Imóveis</div>
+    </div>
+    <div class="page-label">
+      <div class="page-label-main">Plano de Ação · 6 Meses</div>
+      <div class="page-label-period">Mai – Nov 2026</div>
+    </div>
+  </div>
+
+  <div class="section-title">
+    <div class="section-eyebrow">Estratégia e próximos passos</div>
+    <div class="section-name">Caminho de <span>Crescimento</span></div>
+  </div>
+
+  <div class="card" style="margin-bottom:20px; padding:24px">
+    <p style="font-size:14px; color:var(--white); line-height:1.7;">
+      Com a fase de implantação concluída e as <strong style="color:var(--gold)">três plataformas ativas</strong>, traçamos um plano de ação para os próximos 6 meses. O objetivo é evoluir gradualmente a ocupação e a precificação de cada studio, mantendo a qualidade que já garantiu 100% de avaliações 5 estrelas no período.
+    </p>
+  </div>
+
+  <!-- LINHA DO TEMPO -->
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-label">Cronograma do plano · 6 meses</div>
+
+    <div style="margin-top:18px">
+      <!-- MES 1-2 -->
+      <div style="display:flex; gap:16px; align-items:flex-start; margin-bottom:18px; padding-bottom:18px; border-bottom: 1px solid var(--card-border)">
+        <div style="flex-shrink:0; width:90px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--gold)">M1–M2</div>
+          <div style="font-size:10px; color:var(--gray); letter-spacing:0.1em; text-transform:uppercase;">Mai–Jun</div>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:13px; color:var(--white); font-weight:600; margin-bottom:6px;">Aquecimento e construção de histórico</div>
+          <div style="font-size:12px; color:var(--gray); line-height:1.6;">
+            Captação das primeiras avaliações no Booking e VRBO. Otimização contínua dos títulos e descrições com base no comportamento do algoritmo. Calibragem fina da precificação dinâmica em todas as plataformas.
+          </div>
+        </div>
+      </div>
+
+      <!-- MES 3-4 -->
+      <div style="display:flex; gap:16px; align-items:flex-start; margin-bottom:18px; padding-bottom:18px; border-bottom: 1px solid var(--card-border)">
+        <div style="flex-shrink:0; width:90px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--gold)">M3–M4</div>
+          <div style="font-size:10px; color:var(--gray); letter-spacing:0.1em; text-transform:uppercase;">Jul–Ago</div>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:13px; color:var(--white); font-weight:600; margin-bottom:6px;">Posicionamento estratégico nas plataformas</div>
+          <div style="font-size:12px; color:var(--gray); line-height:1.6;">
+            Busca pelo selo Guest Favorite no Airbnb e Top 10% no VRBO. Aumento gradual da ocupação com foco em estadias de média duração. Possível ajuste da diária para acompanhar o crescimento da demanda e o histórico de avaliações construído.
+          </div>
+        </div>
+      </div>
+
+      <!-- MES 5-6 -->
+      <div style="display:flex; gap:16px; align-items:flex-start;">
+        <div style="flex-shrink:0; width:90px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-size:24px; color:var(--gold)">M5–M6</div>
+          <div style="font-size:10px; color:var(--gray); letter-spacing:0.1em; text-transform:uppercase;">Set–Out</div>
+        </div>
+        <div style="flex:1">
+          <div style="font-size:13px; color:var(--white); font-weight:600; margin-bottom:6px;">Consolidação e captura de eventos sazonais</div>
+          <div style="font-size:12px; color:var(--gray); line-height:1.6;">
+            Aproveitamento estratégico do calendário de eventos da região: FENAC, Expointer, feiras regionais e alta temporada da Serra Gaúcha. Otimização do anúncio coletivo "Casa Completa" para captar grupos e famílias maiores.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- METAS POR APARTAMENTO -->
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-label">Metas individuais por studio · Próximos 6 meses</div>
+    <table class="reservas-table">
+      <thead>
+        <tr>
+          <th>Studio</th>
+          <th>Receita atual (21d)</th>
+          <th>Meta mensal · M6</th>
+          <th>Estratégia principal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Apto 01</strong></td>
+          <td>R$ 1.468,61</td>
+          <td class="value-cell">R$ 5.000</td>
+          <td style="font-size:12px; color:var(--gray)">Ampliar ocupação Booking · Diária dinâmica</td>
+        </tr>
+        <tr>
+          <td><strong>Apto 02</strong></td>
+          <td>R$ 1.049,26</td>
+          <td class="value-cell">R$ 5.000</td>
+          <td style="font-size:12px; color:var(--gray)">Captação intensiva nas 3 plataformas</td>
+        </tr>
+        <tr>
+          <td><strong>Apto 03</strong> <span class="card-badge badge-gold" style="font-size:9px;padding:1px 6px">já performando</span></td>
+          <td>R$ 3.332,19</td>
+          <td class="value-cell">R$ 5.000</td>
+          <td style="font-size:12px; color:var(--gray)">Manter histórico · Ampliar diária média</td>
+        </tr>
+        <tr>
+          <td><strong>Apto 04</strong></td>
+          <td>R$ 2.236,82</td>
+          <td class="value-cell">R$ 5.000</td>
+          <td style="font-size:12px; color:var(--gray)">Diversificar reservas · Aproveitar boa tração</td>
+        </tr>
+        <tr style="background:rgba(211,174,54,0.05)">
+          <td><strong style="color:var(--gold)">TOTAL · 4 STUDIOS</strong></td>
+          <td class="value-cell">R$ 8.086,88</td>
+          <td class="value-cell" style="font-size:18px">R$ 20.000</td>
+          <td style="font-size:12px; color:var(--gold)">+147% até nov/2026</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="card-sub" style="margin-top:14px; font-size:11px; line-height:1.6;">
+      <em>Nota: o anúncio coletivo "Casa Completa" (5ª unidade) opera como complemento estratégico. Quando ocupada, a receita gerada é distribuída entre os 4 studios, contribuindo proporcionalmente para a meta individual de cada um.</em>
+    </div>
+  </div>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-label">Próximos passos imediatos</div>
+
+    <div style="margin-top:14px">
+      <div style="display:flex; gap:12px; padding:12px 0; border-bottom: 1px solid var(--card-border)">
+        <div style="color:var(--gold); font-family:'Cormorant Garamond',serif; font-size:22px; line-height:1; flex-shrink:0;">01</div>
+        <div>
+          <div style="font-size:13px; color:var(--white); font-weight:600;">Instalação de detectores de fumaça e CO</div>
+          <div style="font-size:12px; color:var(--gray); margin-top:4px; line-height:1.6;">Equipamento de segurança obrigatório que também melhora o ranking dos anúncios nas três plataformas. Investimento pequeno com retorno imediato em posição de busca.</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; padding:12px 0; border-bottom: 1px solid var(--card-border)">
+        <div style="color:var(--gold); font-family:'Cormorant Garamond',serif; font-size:22px; line-height:1; flex-shrink:0;">02</div>
+        <div>
+          <div style="font-size:13px; color:var(--white); font-weight:600;">Captação ativa de avaliações no Booking e VRBO</div>
+          <div style="font-size:12px; color:var(--gray); margin-top:4px; line-height:1.6;">Solicitação estruturada de avaliações pós-estadia em todos os canais novos. Meta: nota inicial acima de 9.0 nos dois canais nos próximos 60 dias.</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; padding:12px 0; border-bottom: 1px solid var(--card-border)">
+        <div style="color:var(--gold); font-family:'Cormorant Garamond',serif; font-size:22px; line-height:1; flex-shrink:0;">03</div>
+        <div>
+          <div style="font-size:13px; color:var(--white); font-weight:600;">Calibragem da precificação dinâmica</div>
+          <div style="font-size:12px; color:var(--gray); margin-top:4px; line-height:1.6;">Conforme o histórico de avaliações cresce, a diária acompanha esse movimento. Possível aumento gradual nos próximos meses, sempre alinhado à demanda da região e ao perfil de hóspede capturado.</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; padding:12px 0; border-bottom: 1px solid var(--card-border)">
+        <div style="color:var(--gold); font-family:'Cormorant Garamond',serif; font-size:22px; line-height:1; flex-shrink:0;">04</div>
+        <div>
+          <div style="font-size:13px; color:var(--white); font-weight:600;">Ativação do anúncio "Casa Completa"</div>
+          <div style="font-size:12px; color:var(--gray); margin-top:4px; line-height:1.6;">Lançamento ativo do anúncio coletivo dos 4 studios para captação de grupos, famílias estendidas e eventos corporativos. Abre uma nova frente de receita sem custo adicional.</div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; padding:12px 0;">
+        <div style="color:var(--gold); font-family:'Cormorant Garamond',serif; font-size:22px; line-height:1; flex-shrink:0;">05</div>
+        <div>
+          <div style="font-size:13px; color:var(--white); font-weight:600;">Aproveitamento de eventos regionais</div>
+          <div style="font-size:12px; color:var(--gray); margin-top:4px; line-height:1.6;">Mapeamento e ativação antecipada de preços especiais para FENAC, Expointer, alta temporada da Serra e feiras corporativas no Vale dos Sinos.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-highlight card" style="border-color:var(--gold); padding:24px">
+    <div class="card-label" style="color:var(--gold)">Mensagem final</div>
+    <p style="font-size:14px; color:var(--white); line-height:1.7; margin-top:8px;">
+      Joice, o resultado deste primeiro mês completo confirma o potencial dos studios. Em 21 dias atingimos <strong style="color:var(--gold)">R$ 8.086,88</strong> em receita líquida — quase 4x o período anterior. Com as 3 plataformas agora ativas e o plano de 6 meses em execução, os próximos relatórios trarão crescimento mês a mês.
+    </p>
+    <p style="font-size:14px; color:var(--white); line-height:1.7; margin-top:12px;">
+      Obrigado pela confiança. Seguimos juntos.
+    </p>
+  </div>
+
+  <div class="page-footer">
+    <div class="footer-left">URBAN CAPITAL · Joice Tegner</div>
+    <div class="footer-right">Plano de Ação 6 Meses · Mai 2026</div>
+  </div>
+</div>
+
+</body>
+</html>
